@@ -63,5 +63,15 @@ def home():
     return render_template('home.html', n = name)
 #Code goes above here
 
+db.set('Events')
+db.child('Events').push({'title': 'Nefashot Annual Talent Show','text':'2tired2write'})
+db.child('Events').push({'title': 'Guitar Session with Haim Vadim','text':'play guitar with Haim ig'})
+
+@app.route('/events', methods = ['GET', 'POST'])
+def events():
+    dicti = db.child('Events').get().val()
+    return render_template('events.html', d = dicti)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
