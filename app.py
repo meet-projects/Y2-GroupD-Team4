@@ -31,7 +31,7 @@ def login():
             return redirect(url_for('home'))
         except:
             print('Auth login Failed')
-    return render_template("login.html")
+    return render_template("signin.html")
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
