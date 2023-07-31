@@ -21,17 +21,39 @@ app.config['SECRET_KEY'] = 'loai'
 
 #Code goes below here
 
-# @app.route('/', methods=['GET', 'POST'])
-# def authe():
-#     if request.method == 'POST':
-#         email = request.form['email']
-#         password = request.form['password']
-#         try:
-#             login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-#             return redirect(url_for('home'))
-#         except:
-#             print('Auth login Failed')
-#     return render_template("auth.html")
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['Lemail']
+        password = request.form['Lpassword']
+        try:
+            login_session['user'] = auth.sign_in_with_email_and_password(email, password)
+            return redirect(url_for('home'))
+        except:
+            print('Auth login Failed')
+    return render_template("login.html")
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error = ''
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        username = request.form['username']
+        # 
+        login_session['user'] = auth.create_user_with_email_and_password(email, password)
+        login_session['user']['name'] = username
+        try:
+            
+            # print("vadim1")
+            user = {'email': email, 'password' : password, 'username': username}
+            UID = login_session['user']['localId']
+            db.child('Users').child(UID).set(user)
+            return redirect(url_for('home'))
+        except:
+            print('signup failed')
+
+    return render_template("signup.html")
 
 
 #Code goes above here
