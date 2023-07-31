@@ -46,7 +46,7 @@ def signup():
         try:
             
             # print("vadim1")
-            user = {'email': email, 'password' : password, 'full name': name}
+            user = {'email': email, 'password' : password, 'full_name': name}
             UID = login_session['user']['localId']
             db.child('Users').child(UID).set(user)
             return redirect(url_for('home'))
@@ -59,18 +59,30 @@ def signup():
 @app.route('/home', methods=['GET', "POST"])
 def home():
     uid = login_session['user']['localId']
-    name = db.child('Users').child(uid).child('full name').get().val()
+    name = db.child('Users').child(uid).child('full_name').get().val()
     return render_template('home.html', n = name)
 #Code goes above here
 
-db.set('Events')
-db.child('Events').push({'title': 'Nefashot Annual Talent Show','text':'2tired2write'})
-db.child('Events').push({'title': 'Guitar Session with Haim Vadim','text':'play guitar with Haim ig'})
+# db.set('Events')
+# db.child('Events').push({'title': 'Nefashot Annual Talent Show','text':'2tired2write'})
+# db.child('Events').push({'title': 'Guitar Session with Haim Vadim','text':'play guitar with Haim ig'})
 
 @app.route('/events', methods = ['GET', 'POST'])
 def events():
     dicti = db.child('Events').get().val()
     return render_template('events.html', d = dicti)
+
+
+
+
+
+@app.route('/apply', methods = ['GET', 'POST'])
+def apply():
+    
+
+
+
+    return render_template('help.html')
 
 
 if __name__ == '__main__':
