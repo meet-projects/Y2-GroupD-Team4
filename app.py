@@ -53,7 +53,7 @@ def signup():
         except:
             print('signup failed')
 
-    return render_template("signup.html")
+    return render_template("signin.html")
 
 
 @app.route('/home', methods=['GET', "POST"])
