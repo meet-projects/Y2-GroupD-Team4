@@ -5,11 +5,11 @@ import pyrebase
 Config = {
   "apiKey": "AIzaSyC-hCpbDNBYMPbZe73ONWraehZjzig7PxM",
   "authDomain": "nefashoty2.firebaseapp.com",
+  "databaseURL": "https://nefashoty2-default-rtdb.europe-west1.firebasedatabase.app",
   "projectId": "nefashoty2",
   "storageBucket": "nefashoty2.appspot.com",
   "messagingSenderId": "29434455725",
-  "appId": "1:29434455725:web:53dd13f83be0e104a84824",
-  "databaseURL": "https://nefashoty2-default-rtdb.europe-west1.firebasedatabase.app/"}
+  "appId": "1:29434455725:web:53dd13f83be0e104a84824"}
 fb = pyrebase.initialize_app(Config)
 auth = fb.auth()
 db = fb.database()
@@ -39,14 +39,14 @@ def signup():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        username = request.form['username']
+        name = request.form['full_name']
         # 
         login_session['user'] = auth.create_user_with_email_and_password(email, password)
-        login_session['user']['name'] = username
+        login_session['user']['name'] = name
         try:
             
             # print("vadim1")
-            user = {'email': email, 'password' : password, 'username': username}
+            user = {'email': email, 'password' : password, 'full name': name}
             UID = login_session['user']['localId']
             db.child('Users').child(UID).set(user)
             return redirect(url_for('home'))
