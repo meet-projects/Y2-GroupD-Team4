@@ -24,13 +24,13 @@ app.config['SECRET_KEY'] = 'loai'
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['Lemail']
-        password = request.form['Lpassword']
-        try:
-            login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-            return redirect(url_for('home'))
-        except:
-            print('Auth login Failed')
+        email = request.form['email']
+        password = request.form['password']
+        # try:
+        login_session['user'] = auth.sign_in_with_email_and_password(email, password)
+        return redirect(url_for('home'))
+        # except:
+        #     print('Auth login Failed')
     return render_template("signin.html")
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -56,6 +56,9 @@ def signup():
     return render_template("signup.html")
 
 
+@app.route('/home', methods=['GET', "POST"])
+def home():
+    return render_template('home.html')
 #Code goes above here
 
 if __name__ == '__main__':
