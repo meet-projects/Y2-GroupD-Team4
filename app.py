@@ -53,12 +53,14 @@ def signup():
         except:
             print('signup failed')
 
-    return render_template("signup.html")
+    return render_template("signin.html")
 
 
 @app.route('/home', methods=['GET', "POST"])
 def home():
-    return render_template('home.html')
+    uid = login_session['user']['localId']
+    name = db.child('Users').child(uid).child('full name').get().val()
+    return render_template('home.html', n = name)
 #Code goes above here
 
 if __name__ == '__main__':
