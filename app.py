@@ -58,14 +58,15 @@ def signup():
 
 @app.route('/home', methods=['GET', "POST"])
 def home():
+
     uid = login_session['user']['localId']
     name = db.child('Users').child(uid).child('full_name').get().val()
     return render_template('home.html', n = name)
 #Code goes above here
 
-# db.set('Events')
-# db.child('Events').push({'title': 'Nefashot Annual Talent Show','text':'2tired2write'})
-# db.child('Events').push({'title': 'Guitar Session with Haim Vadim','text':'play guitar with Haim ig'})
+# db.set('Applicants')
+# db.child('Applicants').push({'name': 'Sergey Auslender','age':16 , 'exp': 'Robotics mentor'})
+# db.child('Applicants').push({'name': 'Yosi Cohen','age':25 , 'exp': 'DJ for hire, pianist'})
 
 @app.route('/events', methods = ['GET', 'POST'])
 def events():
@@ -80,8 +81,13 @@ def events():
 
 @app.route('/apply', methods = ['GET', 'POST'])
 def apply():
-    # if request.form == 'POST':
-    #     nam = request.form['']
+    if request.method == 'POST':
+        nam = request.form['full_name']
+        age = request.form['age']
+        exp = request.form['exp']
+        dictin = {'name': nam,'age': age , 'exp': exp}
+        db.child('Applicants').push(dictin)
+        return redirect(url_for('home'))
     uid = login_session['user']['localId']
     name = db.child('Users').child(uid).child('full_name').get().val()
     return render_template('help.html', n = name)
