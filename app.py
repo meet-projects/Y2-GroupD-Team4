@@ -69,8 +69,10 @@ def home():
 
 @app.route('/events', methods = ['GET', 'POST'])
 def events():
+    uid = login_session['user']['localId']
+    name = db.child('Users').child(uid).child('full_name').get().val()
     dicti = db.child('Events').get().val()
-    return render_template('events.html', d = dicti)
+    return render_template('events.html', d = dicti, n = name)
 
 
 
@@ -78,11 +80,11 @@ def events():
 
 @app.route('/apply', methods = ['GET', 'POST'])
 def apply():
-    if request.
-
-
-
-    return render_template('help.html')
+    # if request.form == 'POST':
+    #     nam = request.form['']
+    uid = login_session['user']['localId']
+    name = db.child('Users').child(uid).child('full_name').get().val()
+    return render_template('help.html', n = name)
 
 
 if __name__ == '__main__':
