@@ -78,7 +78,7 @@ def events():
 
 @app.route('/apply', methods = ['GET', 'POST'])
 def apply():
-    
+    if request.
 
 
 
