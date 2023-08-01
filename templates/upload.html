@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <!-- Background Image Container -->
+    <div class="background-container"></div>
+
+    <div class="container">
+        <h4>Upload To Sell</h4>
+        <p>Please fill up your information below.</p>
+
+        <form method="POST" action="/upload">
+                    <!-- Heading -->
+            <div>
+                <label>Artist Name*</label>
+                <div>
+                    <input type="name"  name="name"  placeholder="Enter Artist Name Here">
+                </div>
+            </div>
+            <div>
+                <label>Discrption</label>
+                <div>
+                    <input type="text"  name="discrption" placeholder="Enter Discrption Here">
+                </div>
+            </div>
+            <div>
+                <label>Price</label>
+                <div>
+                    <input type="text" name="price" placeholder="Enter Price Here">
+                </div>
+            </div>
+            <div>
+                <label>Photo</label>
+                <div>
+                    <input type="text" name="image" placeholder="Enter Photo Here">
+            </div>
+            
+            <!-- Button -->
+            <div>
+                 <input type="submit" value="Upload" />
+            </div></div>
+        </form>
+    </div>
+
+
+        <br>
+        <a href="/home"><button>Back Home</button></a>
+    
+</body>
+</html>
