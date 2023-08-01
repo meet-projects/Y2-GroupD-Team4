@@ -10850,3 +10850,19 @@ textarea.form-control-lg {
 .test{
   color: darkred;
 }
+
+.container {
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.col-lg-4 {
+    flex: 1 1 auto;
+}
+form {
+    margin: 0 auto;
+}
