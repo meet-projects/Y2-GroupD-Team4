@@ -59,6 +59,44 @@
                     {%endfor%} 
                 </div>
             </div>
+            <form method="POST" action="/admin" >
+        
+        <p>
+            Add an event to the Events page!
+        </p>
+
+        <div>
+            <label>Name the event:</label>
+            <div>
+                <input type="text" name="Event name" required>
+            </div>
+        </div>
+
+        <div>
+            <label>Describe the event:</label>
+            <div class="input-group">
+                <input type="text" name="description" required>
+            </div>
+        </div>
+
+        <div>
+            <label>Write the dates of the event: </label>
+            <div class="input-group">
+                <input type="date" name="dates" required>
+            </div>
+        </div>
+
+        <div>
+            <label>Don't forget the adress: </label>
+            <div class="input-group">
+                <input type="text" name="location" required>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit"/>
+        </div>
+    </form>
         </section>
         <!-- Pricing section-->
         
