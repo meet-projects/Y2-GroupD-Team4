@@ -48,22 +48,25 @@
             </div>
         </header>
         <!-- Features section-->
+
+
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
                     <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h3>Volunteer list:</h3>
                     {%for i in d%}
-                    <h5>{{d[i]['name']}}</h4>
-                    <p>{{d[i]['age']}}</p>
-                    <p>{{d[i]['exp']}}</p>   
+                    <h5>{{d[i]['name']}}</h5>
+                    <p>Age: {{d[i]['age']}}</p>
+                    <p>Interests and experience: {{d[i]['exp']}}</p>   
                     {%endfor%} 
                 </div>
             </div>
             <form method="POST" action="/admin" >
         
-        <p>
+        <h4>
             Add an event to the Events page!
-        </p>
+        </h4>
 
         <div>
             <label>Name the event:</label>
