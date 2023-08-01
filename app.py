@@ -26,11 +26,13 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        # try:
-        login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-        return redirect(url_for('home'))
-        # except:
-        #     print('Auth login Failed')
+        if email == 'admin@nefashot.com' and password == 'admin123':
+            return redirect(url_for('admin'))
+        try:
+            login_session['user'] = auth.sign_in_with_email_and_password(email, password)
+            return redirect(url_for('home'))
+        except:
+            print('Auth login Failed')
     return render_template("signin.html")
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -40,7 +42,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         name = request.form['full_name']
-        # 
+        
         login_session['user'] = auth.create_user_with_email_and_password(email, password)
         login_session['user']['name'] = name
         try:
@@ -92,6 +94,9 @@ def apply():
     name = db.child('Users').child(uid).child('full_name').get().val()
     return render_template('help.html', n = name)
 
-
+@app.route('/admin', methods = ['GET', 'POST'])
+def admin():
+    dictio = db.child('Applicants').get().val()
+    return render_template('admin.html', d = dictio)
 if __name__ == '__main__':
     app.run(debug=True)
