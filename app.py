@@ -96,7 +96,19 @@ def apply():
 
 @app.route('/admin', methods = ['GET', 'POST'])
 def admin():
+    if request.method == 'POST':
+        t = request.form['name']
+        d = request.form['desc']
+        dat = request.form['dates']
+        loc = request.form['loc']
+        db.child('Events').push({'title':t,'text':d, 'dates': dat, 'location': loc})
+
+
+
     dictio = db.child('Applicants').get().val()
     return render_template('admin.html', d = dictio)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
