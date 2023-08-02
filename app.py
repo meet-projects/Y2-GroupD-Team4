@@ -124,7 +124,10 @@ def admin():
 @app.route('/shop', methods = ['GET', 'POST'])
 def shop():
   posts=db.child('Posts').get().val()
-  return render_template('shop.html',posts=posts)
+  if posts != None:
+    return render_template('shop.html',posts=posts)
+  else:
+    return render_template('shop.html',posts=None)
 
 
 
