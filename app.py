@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask import session as login_session
 import pyrebase
+import os 
 
 Config = {
   "apiKey": "AIzaSyC-hCpbDNBYMPbZe73ONWraehZjzig7PxM",
@@ -18,9 +19,11 @@ db = fb.database()
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['SECRET_KEY'] = 'loai'
-
 #Code goes below here
 
+
+UPLOAD_FOLDER='static/uploads'
+app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -78,7 +81,24 @@ def events():
     return render_template('events.html', d = dicti, n = name)
 
 
-
+@app.route('/upload', methods = ['GET', 'POST'])
+def upload():
+  if request.method == "POST":
+    name=request.form['name']
+    price=request.form['price']
+    image=request.form['image']
+    discrption=request.form['discrption']
+    # filename=image.filename
+    # UPLOAD_FOLDER=os.path.join('static', 'uploads')
+    # if not os.path.exists(UPLOAD_FOLDER):
+    #   os.makedirs(UPLOAD_FOLDER)
+    # image_filename=os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    # image.save(image_filename)
+    post={"name":name,"price":price,"image":image,"discrption":discrption}
+    db.child("Posts").push(post)
+    return redirect(url_for('shop'))
+  else:
+    return render_template('upload.html')
 
 
 @app.route('/apply', methods = ['GET', 'POST'])
@@ -96,17 +116,17 @@ def apply():
 
 @app.route('/admin', methods = ['GET', 'POST'])
 def admin():
-    if request.method == 'POST':
-        t = request.form['name']
-        d = request.form['desc']
-        dat = request.form['dates']
-        loc = request.form['loc']
-        db.child('Events').push({'title':t,'text':d, 'dates': dat, 'location': loc})
-
-
-
     dictio = db.child('Applicants').get().val()
     return render_template('admin.html', d = dictio)
+
+
+
+@app.route('/shop', methods = ['GET', 'POST'])
+def shop():
+  posts=db.child('Posts').get().val()
+  return render_template('shop.html',posts=posts)
+
+
 
 
 

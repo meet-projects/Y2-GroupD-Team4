@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shop</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+	<h1>Posts</h1>
+	<div>
+	{%for post in posts%}
+		<div>
+			<img src="{{posts[post]['image']}}" alt="{{posts[post]['discrption']}}"></img>
+			<h2>{{posts[post]['price']}}</h2><h2>₪</h2>
+			<h2>By The Artist:</h2><h2>{{posts[post]['name']}}</h2>
+			<img src="{{posts[post]['image']}}">
+		<!-- return jsonify({'video': '/path/to/video.mp4'}) -->
+</div>
+	{% endfor %}
+	</div>
+    <br>
+        <a href="/home"><button>Back Home</button></a>
+</body>
+</html>
