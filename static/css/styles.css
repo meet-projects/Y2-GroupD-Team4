@@ -99,7 +99,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: #1A5276 ;
   text-align: var(--bs-body-text-align);
-  background-color:#EBDEF0 ;
+  background-color:#EBF5FB ;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
