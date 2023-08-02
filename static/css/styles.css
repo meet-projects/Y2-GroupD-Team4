@@ -10880,3 +10880,7 @@ textarea.form-control-lg {
 #imgi{
   object-position: top 00px left 20px;
 }
+.vadim5{
+  --bs-text-opacity: 1;
+  color: rgba(31, 97, 141) !important;
+}
